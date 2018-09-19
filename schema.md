@@ -44,7 +44,6 @@
 	STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 	DIAGNOSIS(DiagnosisCode, [pk] Description, PractitionerID [fk])
 	SERVICE(ServiceCode, [pk] Details, DiagnosisCode [fk1], FunderID [fk2], StaffID [fk3])
-	MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
 
 	MEETS(StaffID [fk1], ClientID [fk2], [pk])
 	AFFECTS(DiagnosisCode [fk1], ClientID [fk2], [pk])
