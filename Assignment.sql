@@ -1,9 +1,8 @@
 
 /**
  * KIT102 Data Modelling Assignment
- *
+ * Semester 2, 2018
  * Shea Bunge (407095)
- *
  */
 
 USE sbunge;
@@ -81,7 +80,7 @@ CREATE TABLE MOBILITYTEST (
 	FacilityCode INT(11)      NOT NULL,
 
 	PRIMARY KEY (TestID),
-	FOREIGN KEY (FacilityCode) REFERENCES MOBILITYTESTINGFACILITY (FacilityCode),
+	FOREIGN KEY (FacilityCode) REFERENCES MOBILITYTESTINGFACILITY (FacilityCode)
 
 ) ENGINE=InnoDB;
 
@@ -98,7 +97,7 @@ CREATE TABLE CLIENT (
 
 	PRIMARY KEY (ClientID),
 	FOREIGN KEY (AddressID) REFERENCES ADDRESS (AddressID),
-	FOREIGN KEY (TestID) REFERENCES MOBILITYTEST (TestID),
+	FOREIGN KEY (TestID) REFERENCES MOBILITYTEST (TestID)
 
 ) ENGINE=InnoDB;
 
@@ -115,8 +114,8 @@ CREATE TABLE STAFFMEMBER (
 	Manager           INT(11),
 
 	PRIMARY KEY (StaffID),
-	FOREIGN KEY (Qualification) REFERENCES QUALIFICATION (QualificationName),
-	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID),
+	FOREIGN KEY (QualificationName) REFERENCES QUALIFICATION (QualificationName),
+	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID)
 
 ) ENGINE=InnoDB;
 
@@ -202,5 +201,4 @@ INSERT INTO ADDRESS (AddressID, StreetNumber, StreetName, Suburb, Postcode) VALU
 	(2, 262, 'Invermay Rd', 'Mowbray', 7248);
 
 
-INSERT INTO CLIENT (ClientIDAddressID, TestID)
 
