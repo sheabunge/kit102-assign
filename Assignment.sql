@@ -7,6 +7,13 @@
 
 USE sbunge;
 
+-- remove any existing tables before recreating
+
+DROP TABLE IF EXISTS
+	AFFECTS, MEETS,
+	MOBILITYTEST, SERVICE, DIAGNOSIS, STAFFMEMBER, CLIENT, MOBILITYTEST,
+	MOBILITYTESTINGFACILITY, FUNDINGBODY, PRACTITIONER, QUALIFICATION, ADDRESS;
+
 
 -- ADDRESS(AddressID, [pk] StreetNumber, StreetName, Suburb, Postcode)
 
