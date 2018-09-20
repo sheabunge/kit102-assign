@@ -40,6 +40,7 @@
 	MOBILITYTESTINGFACILITY(FacilityCode, [pk] TestDetails)
 
 	MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
+	MOBILITYTESTRESULT(TestResultID [pk], FacilityCode [fk])
 	CLIENT(ClientID, [pk] Name, AddressID [fk1], TestID [fk2])
 	STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 	DIAGNOSIS(DiagnosisCode, [pk] Description, PractitionerID [fk])

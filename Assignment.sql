@@ -24,8 +24,8 @@ CREATE TABLE ADDRESS (
 	Postcode     SMALLINT(4) NOT NULL,
 
 	PRIMARY KEY (AddressID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- QUALIFICATION(QualificationName, [pk] Details)
@@ -35,8 +35,9 @@ CREATE TABLE QUALIFICATION (
 	Details           VARCHAR(255) NOT NULL DEFAULT '',
 
 	PRIMARY KEY (QualificationName)
+)
+ENGINE = InnoDB;
 
-) ENGINE = InnoDB;
 
 -- PRACTITIONER(PractitionerID, [pk] Name)
 
@@ -45,8 +46,8 @@ CREATE TABLE PRACTITIONER (
 	Name           VARCHAR(70) NOT NULL,
 
 	PRIMARY KEY (PractitionerID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- FUNDINGBODY(FunderID, [pk] Details)
@@ -56,8 +57,8 @@ CREATE TABLE FUNDINGBODY (
 	Details  VARCHAR(255) NOT NULL DEFAULT '',
 
 	PRIMARY KEY (FunderID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- MOBILITYTESTINGFACILITY(FacilityCode, [pk] TestDetails)
@@ -67,8 +68,8 @@ CREATE TABLE MOBILITYTESTINGFACILITY (
 	TestDetails  VARCHAR(255) NOT NULL,
 
 	PRIMARY KEY (FacilityCode)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
@@ -80,8 +81,20 @@ CREATE TABLE MOBILITYTEST (
 
 	PRIMARY KEY (TestID),
 	FOREIGN KEY (FacilityCode) REFERENCES MOBILITYTESTINGFACILITY (FacilityCode)
+)
+ENGINE = InnoDB;
 
-) ENGINE = InnoDB;
+
+-- MOBILITYTESTRESULT(TestResultID [pk], FacilityCode [fk])
+
+CREATE TABLE MOBILITYTESTRESULT (
+	TestResultID INT(11) NOT NULL AUTO_INCREMENT,
+	FacilityCode INT(11) NOT NULL,
+
+	PRIMARY KEY (TestResultID),
+	FOREIGN KEY (FacilityCode) REFERENCES MOBILITYTESTINGFACILITY (FacilityCode)
+)
+ENGINE = InnoDB;
 
 
 -- CLIENT(ClientID, [pk] Name, AddressID [fk1], TestID [fk2])
@@ -95,25 +108,25 @@ CREATE TABLE CLIENT (
 	PRIMARY KEY (ClientID),
 	FOREIGN KEY (AddressID) REFERENCES ADDRESS (AddressID),
 	FOREIGN KEY (TestID) REFERENCES MOBILITYTEST (TestID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 
 CREATE TABLE STAFFMEMBER (
-	StaffID           INT(11)                    NOT NULL AUTO_INCREMENT,
-	Name              VARCHAR(70)                NOT NULL,
-	Sex               ENUM ('NA', 'M', 'F', 'X') NOT NULL, # see: https://en.wikipedia.org/wiki/ISO/IEC_5218
-	Age               TINYINT(3)                 NOT NULL,
-	QualificationName VARCHAR(50)                NOT NULL, # check length
+	StaffID           INT(11)                   NOT NULL AUTO_INCREMENT,
+	Name              VARCHAR(70)               NOT NULL,
+	Sex               ENUM('NA', 'M', 'F', 'X') NOT NULL, # see: https://en.wikipedia.org/wiki/ISO/IEC_5218
+	Age               TINYINT(3)                NOT NULL,
+	QualificationName VARCHAR(50)               NOT NULL, # check length
 	Manager           INT(11),
 
 	PRIMARY KEY (StaffID),
 	FOREIGN KEY (QualificationName) REFERENCES QUALIFICATION (QualificationName),
 	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- DIAGNOSIS(DiagnosisCode, [pk] Description, PractitionerID [fk])
@@ -125,7 +138,8 @@ CREATE TABLE DIAGNOSIS (
 
 	PRIMARY KEY (DiagnosisCode),
 	FOREIGN KEY (PractitionerID) REFERENCES PRACTITIONER (PractitionerID)
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- SERVICE(ServiceCode, [pk] Details, DiagnosisCode [fk1], FunderID [fk2], StaffID [fk3])
@@ -141,8 +155,8 @@ CREATE TABLE SERVICE (
 	FOREIGN KEY (DiagnosisCode) REFERENCES DIAGNOSIS (DiagnosisCode),
 	FOREIGN KEY (FunderID) REFERENCES FUNDINGBODY (FunderID),
 	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
@@ -154,8 +168,8 @@ CREATE TABLE MOBILITYTEST (
 
 	PRIMARY KEY (TestID),
 	FOREIGN KEY (FacilityCode) REFERENCES MOBILITYTESTINGFACILITY (FacilityCode)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- MEETS(StaffID [fk1], ClientID [fk2], [pk])
@@ -167,8 +181,8 @@ CREATE TABLE MEETS (
 	PRIMARY KEY (StaffID, ClientID),
 	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID),
 	FOREIGN KEY (ClientID) REFERENCES CLIENT (ClientID)
-
-) ENGINE = InnoDB;
+)
+ENGINE = InnoDB;
 
 
 -- AFFECTS(DiagnosisCode [fk1], ClientID [fk2], [pk])
@@ -180,15 +194,6 @@ CREATE TABLE AFFECTS (
 	PRIMARY KEY (DiagnosisCode, ClientID),
 	FOREIGN KEY (DiagnosisCode) REFERENCES DIAGNOSIS (DiagnosisCode),
 	FOREIGN KEY (ClientID) REFERENCES CLIENT (ClientID)
-
-) ENGINE=InnoDB;
-
-
--- insert data into tables
-
-INSERT INTO ADDRESS (AddressID, StreetNumber, StreetName, Suburb, Postcode) VALUES
-	(1, 5, 'Sandy Bay Road', 'Hobart', 7001),
-	(2, 262, 'Invermay Rd', 'Mowbray', 7248);
-
-
+)
+ENGINE = InnoDB;
 
