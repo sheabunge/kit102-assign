@@ -169,6 +169,67 @@ CREATE TABLE AFFECTS (
 	PRIMARY KEY (DiagnosisCode, ClientID),
 	FOREIGN KEY (DiagnosisCode) REFERENCES DIAGNOSIS (DiagnosisCode),
 	FOREIGN KEY (ClientID) REFERENCES CLIENT (ClientID)
-)
-ENGINE = InnoDB;
+) ENGINE = InnoDB;
 
+
+
+-- insert data into tables
+
+INSERT INTO MOBILITYTESTINGFACILITY
+	(FacilityCode, TestDetails) VALUES
+	(202919, '');
+
+INSERT INTO MOBILITYTEST
+	(TestID, TestDetails, FacilityCode) VALUES
+	(1, 'No mobility test has been requested.', 202919),
+	(2, 'a test to test something', 202919);
+
+INSERT INTO MOBILITYTESTRESULT
+	(TestResultID, FacilityCode) VALUES
+	(1, 202919);
+
+INSERT INTO ADDRESS
+	(AddressID, StreetNumber, StreetName, Suburb, Postcode) VALUES
+	(1, 5, 'Sandy Bay Road', 'Hobart', 7001),
+	(2, 262, 'Invermay Rd', 'Mowbray', 7248);
+
+INSERT INTO CLIENT
+	(ClientID, Name, AddressID, TestID) VALUES
+	(1, 'Mary Lister', 2, 1),
+	(2, 'Tom Jones', 1, 2);
+
+INSERT INTO QUALIFICATION
+	(QualificationName, Details) VALUES
+	('Qualification 1', 'Details of qualification one'),
+	('Qualification 2', 'Details of qualification two');
+
+INSERT INTO PRACTITIONER
+	(PractitionerID, Name) VALUES
+	(1, 'Dr. Matthew Riviera');
+
+INSERT INTO DIAGNOSIS
+	(DiagnosisCode, Description, PractitionerID) VALUES
+	(82382, 'Description of diagnosis', 1);
+
+INSERT INTO FUNDINGBODY
+	(FunderID, Details) VALUES
+	(1, 'Wayne Trust');
+
+INSERT INTO STAFFMEMBER
+	(StaffID, Name, Sex, Age, QualificationName, Manager) VALUES
+	(1, 'Jane Thomas', 'F', 43, 'Qualification 1', 1),
+	(2, 'Edward Vogt', 'M', 39, 'Qualification 2', 1),
+	(3, 'Holly Pell', 'F', 35, 'Qualification 1', 1);
+
+INSERT INTO SERVICE
+	(ServiceCode, Details, DiagnosisCode, FunderID, StaffID) VALUES
+	(293929, 'Details of service', 82382, 1, 2);
+
+INSERT INTO MEETS
+	(StaffID, ClientID) VALUES
+	(2, 2),
+	(2, 1);
+
+INSERT INTO AFFECTS
+	(DiagnosisCode, ClientID) VALUES
+	(82382, 2);
