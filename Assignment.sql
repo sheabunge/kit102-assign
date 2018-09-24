@@ -177,17 +177,19 @@ CREATE TABLE AFFECTS (
 -- insert data into tables
 
 INSERT INTO MOBILITYTESTINGFACILITY
-	(FacilityCode, TestDetails) VALUES
-	(202919, '');
+	(FacilityCode, Details) VALUES
+	(171233, 'Department of Health and Human Services: Disability Assessment and Advisory Team'),
+	(278445, 'Allied Health Therapy Services');
 
 INSERT INTO MOBILITYTEST
-	(TestID, TestDetails, FacilityCode) VALUES
-	(1, 'No mobility test has been requested.', 202919),
-	(2, 'a test to test something', 202919);
+	(TestID, Details, FacilityCode) VALUES
+	(1, 'Hip and ankle mobility tests', 171233),
+	(2, 'Thoracic mobility test', 278445);
 
 INSERT INTO MOBILITYTESTRESULT
-	(TestResultID, FacilityCode) VALUES
-	(1, 202919);
+	(TestResultID, Details, FacilityCode) VALUES
+	(1, 'Lacking hip mobility', 171233),
+	(2, 'Test passed', 278445);
 
 INSERT INTO ADDRESS
 	(AddressID, StreetNumber, StreetName, Suburb, Postcode) VALUES
@@ -196,41 +198,53 @@ INSERT INTO ADDRESS
 
 INSERT INTO CLIENT
 	(ClientID, Name, AddressID, TestID) VALUES
-	(1, 'Mary Lister', 2, 1),
-	(2, 'Tom Jones', 1, 2);
+	(1, 'William Traynor', 1, 2),
+	(2, 'Peggy Carter', 2, 1);
 
 INSERT INTO QUALIFICATION
 	(QualificationName, Details) VALUES
-	('Qualification 1', 'Details of qualification one'),
-	('Qualification 2', 'Details of qualification two');
+	('Business Manager', 'Manages administrative details about the business.'),
+	('Gardener', 'Provides garden care services'),
+	('Domestic Cleaner', 'Provides domestic cleaning services'),
+	('Personal Carer', 'Provides personal care services');
 
 INSERT INTO PRACTITIONER
 	(PractitionerID, Name) VALUES
-	(1, 'Dr. Matthew Riviera');
+	(1, 'Dr. Nicholas Riviera'),
+	(2, 'Dr. Selma Zaius');
 
 INSERT INTO DIAGNOSIS
 	(DiagnosisCode, Description, PractitionerID) VALUES
-	(82382, 'Description of diagnosis', 1);
+	(72382, 'Arthritis', 1),
+	(46090, 'Dementia', 1),
+	(15906, 'Tetraplegia', 2);
 
 INSERT INTO FUNDINGBODY
 	(FunderID, Details) VALUES
-	(1, 'Wayne Trust');
+	(1, 'Department of Veterans\' Affairs'),
+	(2, 'Carers Tasmania');
 
 INSERT INTO STAFFMEMBER
-	(StaffID, Name, Sex, Age, QualificationName, Manager) VALUES
-	(1, 'Jane Thomas', 'F', 43, 'Qualification 1', 1),
-	(2, 'Edward Vogt', 'M', 39, 'Qualification 2', 1),
-	(3, 'Holly Pell', 'F', 35, 'Qualification 1', 1);
+	(StaffIDEmployee, Name, Sex, Age, QualificationName, StaffIDManager) VALUES
+	(1, 'Jane Thomas', 'F', 43, 'Business Manager', 1),
+	(2, 'Samwise Gamgee', 'M', 39, 'Gardener', 1),
+	(3, 'Louisa Clark', 'F', 35, 'Domestic Cleaner', 1),
+	(4, 'Ami Driss', 'M', 33, 'Personal Carer', 1);
 
 INSERT INTO SERVICE
 	(ServiceCode, Details, DiagnosisCode, FunderID, StaffID) VALUES
-	(293929, 'Details of service', 82382, 1, 2);
+	(47879, 'Personal care', 15906, 2, 4),
+	(70596, 'Gardening', 72382, 1, 2),
+	(29481, 'Domestic cleaning', 46090, 2, 3);
 
 INSERT INTO MEETS
 	(StaffID, ClientID) VALUES
-	(2, 2),
-	(2, 1);
+	(3, 1),
+	(4, 1),
+	(1, 2),
+	(2, 2);
 
 INSERT INTO AFFECTS
 	(DiagnosisCode, ClientID) VALUES
-	(82382, 2);
+	(15906, 1),
+	(72382, 2);
