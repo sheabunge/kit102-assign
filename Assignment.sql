@@ -108,16 +108,16 @@ CREATE TABLE CLIENT (
 -- STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 
 CREATE TABLE STAFFMEMBER (
-	StaffID           INT(11)                   NOT NULL AUTO_INCREMENT,
+	StaffIDEmployee   INT(11)                   NOT NULL AUTO_INCREMENT,
 	Name              VARCHAR(70)               NOT NULL,
 	Sex               ENUM('NA', 'M', 'F', 'X') NOT NULL, # see: https://en.wikipedia.org/wiki/ISO/IEC_5218
 	Age               TINYINT(3)                NOT NULL,
-	QualificationName VARCHAR(50)               NOT NULL, # check length
-	Manager           INT(11),
+	QualificationName VARCHAR(50)               NOT NULL,
+	StaffIDManager    INT(11),
 
-	PRIMARY KEY (StaffID),
+	PRIMARY KEY (StaffIDEmployee),
 	FOREIGN KEY (QualificationName) REFERENCES QUALIFICATION (QualificationName),
-	FOREIGN KEY (Manager) REFERENCES STAFFMEMBER (StaffID)
+	FOREIGN KEY (StaffIDManager) REFERENCES STAFFMEMBER (StaffIDEmployee)
 ) ENGINE = InnoDB;
 
 
@@ -145,7 +145,7 @@ CREATE TABLE SERVICE (
 	PRIMARY KEY (ServiceCode),
 	FOREIGN KEY (DiagnosisCode) REFERENCES DIAGNOSIS (DiagnosisCode),
 	FOREIGN KEY (FunderID) REFERENCES FUNDINGBODY (FunderID),
-	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID)
+	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffIDEmployee)
 ) ENGINE = InnoDB;
 
 
@@ -156,7 +156,7 @@ CREATE TABLE MEETS (
 	ClientID INT(11) NOT NULL,
 
 	PRIMARY KEY (StaffID, ClientID),
-	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffID),
+	FOREIGN KEY (StaffID) REFERENCES STAFFMEMBER (StaffIDEmployee),
 	FOREIGN KEY (ClientID) REFERENCES CLIENT (ClientID)
 ) ENGINE = InnoDB;
 
