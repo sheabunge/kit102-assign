@@ -97,7 +97,8 @@ CREATE TABLE CLIENT (
 	ClientID  INT(11)     NOT NULL AUTO_INCREMENT,
 	Name      VARCHAR(70) NOT NULL,
 	AddressID INT(11)     NOT NULL,
-	TestID    INT(11)     NULL, # if the client has not requested a mobility test, this column can be set to NULL
+	TestID    INT(11)     NULL,
+	# if the client has not requested a mobility test, this column can be set to NULL
 
 	PRIMARY KEY (ClientID),
 	FOREIGN KEY (AddressID) REFERENCES ADDRESS (AddressID),
@@ -110,7 +111,8 @@ CREATE TABLE CLIENT (
 CREATE TABLE STAFFMEMBER (
 	StaffIDEmployee   INT(11)                   NOT NULL AUTO_INCREMENT,
 	Name              VARCHAR(70)               NOT NULL,
-	Sex               ENUM('NA', 'M', 'F', 'X') NOT NULL, # this uses the international standard ISO/IEC 5218 (see https://en.wikipedia.org/wiki/ISO/IEC_5218)
+	Sex               ENUM('NA', 'M', 'F', 'X') NOT NULL,
+	# this uses the international standard ISO/IEC 5218 (see https://en.wikipedia.org/wiki/ISO/IEC_5218)
 	Age               TINYINT(3)                NOT NULL,
 	QualificationName VARCHAR(50)               NOT NULL,
 	StaffIDManager    INT(11)                   NULL,
@@ -199,7 +201,7 @@ INSERT INTO ADDRESS
 INSERT INTO CLIENT
 	(ClientID, Name, AddressID, TestID) VALUES
 	(1, 'William Traynor', 1, 2),
-	(2, 'Peggy Carter', 2, 1);
+	(2, 'Margaret Carter', 2, 1);
 
 INSERT INTO QUALIFICATION
 	(QualificationName, Details) VALUES
