@@ -10,9 +10,9 @@
 	PRACTITIONER(PractitionerID, [pk] Name)
 	FUNDINGBODY(FunderID, [pk] Details)
 	SERVICE(ServiceCode, [pk] Details)
-	MOBILITYTEST(TestID, [pk] TestDetails)
-	MOBILITYTESTINGFACILITY(FacilityCode, [pk] TestDetails)
-	MOBILITYTESTRESULT(TestResultID, [pk])
+	MOBILITYTEST(TestID, [pk] Details)
+	MOBILITYTESTINGFACILITY(FacilityCode, [pk] Details)
+	MOBILITYTESTRESULT(TestResultID, [pk] Details)
 
 
 ### Step 2
@@ -27,8 +27,8 @@
 	STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 	DIAGNOSIS(DiagnosisCode, [pk] Description, PractitionerID [fk])
 	SERVICE(ServiceCode, [pk] Details, DiagnosisCode [fk1], FunderID [fk2], StaffID [fk3])
-	MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
-	MOBILITYTESTRESULT(TestResultID [pk], FacilityCode [fk])
+	MOBILITYTEST(TestID, [pk] Details, FacilityCode [fk])
+	MOBILITYTESTRESULT(TestResultID [pk], Details, FacilityCode [fk])
 
 
 ### Step 4
@@ -37,10 +37,10 @@
 	QUALIFICATION(QualificationName, [pk] Details)
 	PRACTITIONER(PractitionerID, [pk] Name)
 	FUNDINGBODY(FunderID, [pk] Details)
-	MOBILITYTESTINGFACILITY(FacilityCode, [pk] TestDetails)
+	MOBILITYTESTINGFACILITY(FacilityCode, [pk] Details)
 
-	MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
-	MOBILITYTESTRESULT(TestResultID [pk], FacilityCode [fk])
+	MOBILITYTEST(TestID, [pk] Details, FacilityCode [fk])
+	MOBILITYTESTRESULT(TestResultID [pk], Details, FacilityCode [fk])
 	CLIENT(ClientID, [pk] Name, AddressID [fk1], TestID [fk2])
 	STAFFMEMBER(StaffID, [pk] Name, Sex, Age, QualificationName [fk1], Manager [fk2])
 	DIAGNOSIS(DiagnosisCode, [pk] Description, PractitionerID [fk])
