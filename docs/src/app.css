@@ -14,6 +14,7 @@ h1, h2 {
 
 h2 {
 	font-size: 1.3rem;
+	margin-bottom: 0.5em;
 }
 
 @media print {
@@ -32,6 +33,9 @@ h2 {
 	word-wrap: normal;
 	page-break-inside: avoid;
 	break-before: avoid-page;
+	background: rgb(245, 242, 240);
+	padding: 0.5em;
+	overflow: auto;
 }
 
 .relation {
@@ -42,11 +46,11 @@ h2 {
 }
 
 .relation-name {
-	color: #9a6e3a;
-}
+	color: rgb(154, 110, 58);
+	background: rgba(255, 255, 255, 0.5);}
 
 .relation-fk {
-	color: #224C98;
+	color: rgb(0, 119, 170); /* #224C98; */
 }
 
 .relation-open–tuple,
