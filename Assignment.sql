@@ -57,7 +57,7 @@ CREATE TABLE FUNDINGBODY (
 ) ENGINE = InnoDB;
 
 
--- MOBILITYTESTINGFACILITY(FacilityCode, [pk] TestDetails)
+-- MOBILITYTESTINGFACILITY(FacilityCode, [pk] Details)
 
 CREATE TABLE MOBILITYTESTINGFACILITY (
 	FacilityCode INT(11)      NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE MOBILITYTESTINGFACILITY (
 ) ENGINE = InnoDB;
 
 
--- MOBILITYTEST(TestID, [pk] TestDetails, FacilityCode [fk])
+-- MOBILITYTEST(TestID, [pk] Details, FacilityCode [fk])
 
 CREATE TABLE MOBILITYTEST (
 	TestID       INT(11)      NOT NULL AUTO_INCREMENT,
@@ -79,7 +79,7 @@ CREATE TABLE MOBILITYTEST (
 ) ENGINE = InnoDB;
 
 
--- MOBILITYTESTRESULT(TestResultID [pk], FacilityCode [fk])
+-- MOBILITYTESTRESULT(TestResultID [pk], Details, FacilityCode [fk])
 
 CREATE TABLE MOBILITYTESTRESULT (
 	TestResultID INT(11)      NOT NULL AUTO_INCREMENT,
@@ -98,7 +98,7 @@ CREATE TABLE CLIENT (
 	Name      VARCHAR(70) NOT NULL,
 	AddressID INT(11)     NOT NULL,
 	TestID    INT(11)     NULL,
-	# if the client has not requested a mobility test, this column can be set to NULL
+	# TestID can be set to NULL if the client has not requested a mobility test
 
 	PRIMARY KEY (ClientID),
 	FOREIGN KEY (AddressID) REFERENCES ADDRESS (AddressID),
@@ -112,7 +112,7 @@ CREATE TABLE STAFFMEMBER (
 	StaffIDEmployee   INT(11)                   NOT NULL AUTO_INCREMENT,
 	Name              VARCHAR(70)               NOT NULL,
 	Sex               ENUM('NA', 'M', 'F', 'X') NOT NULL,
-	# this uses the international standard ISO/IEC 5218 (see https://en.wikipedia.org/wiki/ISO/IEC_5218)
+	# Sex uses the international standard ISO/IEC 5218 (see https://en.wikipedia.org/wiki/ISO/IEC_5218)
 	Age               TINYINT(3)                NOT NULL,
 	QualificationName VARCHAR(50)               NOT NULL,
 	StaffIDManager    INT(11)                   NULL,
@@ -190,8 +190,9 @@ INSERT INTO MOBILITYTEST
 
 INSERT INTO MOBILITYTESTRESULT
 	(TestResultID, Details, FacilityCode) VALUES
-	(1, 'Lacking hip mobility', 171233),
-	(2, 'Test passed', 278445);
+	(1, 'Test 1: Lacking hip mobility', 171233),
+	(2, 'Test 2: Passed', 278445);
+	# as there is no relational way to connect results to tests, the test identifier is included in the test result details
 
 INSERT INTO ADDRESS
 	(AddressID, StreetNumber, StreetName, Suburb, Postcode) VALUES
@@ -213,7 +214,7 @@ INSERT INTO QUALIFICATION
 INSERT INTO PRACTITIONER
 	(PractitionerID, Name) VALUES
 	(1, 'Dr. Nicholas Riviera'),
-	(2, 'Dr. Selma Zaius');
+	(2, 'Dr. Stephen Strange');
 
 INSERT INTO DIAGNOSIS
 	(DiagnosisCode, Description, PractitionerID) VALUES
@@ -231,7 +232,7 @@ INSERT INTO STAFFMEMBER
 	(1, 'Jane Thomas', 'F', 43, 'Business Manager', 1),
 	(2, 'Samwise Gamgee', 'M', 39, 'Gardener', 1),
 	(3, 'Louisa Clark', 'F', 35, 'Domestic Cleaner', 1),
-	(4, 'Ami Driss', 'M', 33, 'Personal Carer', 1);
+	(4, 'Ami Driss', 'M', 33, 'Personal Carer', 3);
 
 INSERT INTO SERVICE
 	(ServiceCode, Details, DiagnosisCode, FunderID, StaffID) VALUES
