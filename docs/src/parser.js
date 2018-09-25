@@ -183,7 +183,7 @@ export class SchemaParser {
 	read(pattern) {
 		let result = this.peek(pattern);
 
-		if (!result) throw new ParseError('invalid match ' + pattern + ' of ' + this.remaining());
+		if (!result) throw new ParseError(`invalid match ${pattern} of ${this.remaining()}`);
 
 		this.pointer += result[0].length;
 		this.eat_whitespace();
