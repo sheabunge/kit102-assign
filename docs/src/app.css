@@ -1,0 +1,60 @@
+
+.container {
+	margin: 0 4em;
+}
+
+h1 {
+	text-align: center;
+}
+
+h1, h2 {
+	font-family: Droid Serif, serif;
+	break-after: avoid-page;
+}
+
+h2 {
+	font-size: 1.3rem;
+}
+
+@media print {
+	h1 {
+		margin-top: 0;
+	}
+}
+
+.schema {
+	color: #000;
+	text-shadow: 0 1px white;
+	text-align: left;
+	white-space: normal;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	page-break-inside: avoid;
+	break-before: avoid-page;
+}
+
+.relation {
+	display: block;
+	line-height: 1.6;
+	font-family: Roboto, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace !important;
+	font-size: 15px;
+}
+
+.relation-name {
+	color: #9a6e3a;
+}
+
+.relation-fk {
+	color: #224C98;
+}
+
+.relation-open–tuple,
+.relation-close–tuple {
+	color: #888;
+	padding: 0 1px;
+}
+
+.relation-pk .relation-attribute {
+	text-decoration: underline;
+}
