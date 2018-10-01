@@ -1,6 +1,41 @@
 
+* {
+	box-sizing: border-box;
+}
+
+@page {
+	@bottom-right {
+		content: counter(page) " of " counter(pages);
+	}
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 .container {
-	margin: 0 4em;
+	margin: 2em auto;
+	max-width: 700px;
+}
+
+.document-info {
+	font-size: small;
+	font-family: Droid Sans, sans-serif;
+}
+
+footer.document-info {
+	display: flex;
+	justify-content: space-between;
+	padding: 2em 0;
+	color: #696969;
+}
+
+header.document-info {
+	float: right;
+	text-align: right;
+	position: absolute;
+	right: 4em;
 }
 
 h1 {
@@ -17,10 +52,23 @@ h2 {
 	margin-bottom: 0.5em;
 }
 
+html, body, .container, section {
+	float: none;
+}
+
 @media print {
 	h1 {
 		margin-top: 0;
 	}
+
+	.container {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+section {
+	page-break-inside: avoid;
 }
 
 .schema {
@@ -51,6 +99,10 @@ h2 {
 
 .relation-fk {
 	color: rgb(0, 119, 170); /* #224C98; */
+}
+
+.relation-sep {
+	color: #696969;
 }
 
 .relation-open–tuple,
